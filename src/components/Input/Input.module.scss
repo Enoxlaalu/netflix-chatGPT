@@ -1,0 +1,48 @@
+@mixin floating {
+  font-size: 10px;
+  top: 10px;
+  translate: none;
+}
+
+.inputContainer {
+  position: relative;
+
+  .input {
+    border: 1px solid #ccc;
+    padding: 12px 8px;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    background-color: transparent;
+    color: #fff;
+    padding: 24px 16px 8px;
+
+    &:focus {
+      border-color: #fff;
+
+      & + label {
+        @include floating;
+      }
+    }
+  }
+
+  .label {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    translate: 0 -50%;
+    transition: 0.3s ease;
+    color: #aaa;
+    pointer-events: none;
+
+    &.hasValue {
+      @include floating;
+    }
+  }
+}
+
+.error {
+  color: red;
+}
