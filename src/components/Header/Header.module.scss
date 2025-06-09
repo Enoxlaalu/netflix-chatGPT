@@ -1,0 +1,31 @@
+.header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-column-gap: 24px;
+  align-items: center;
+  padding: 32px 90px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 0) 100%);
+
+  > svg {
+    margin-right: 68px;
+  }
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+
+  li a {
+    font-size: 22px;
+    color: #dadada;
+
+    &.active {
+      color: #fff;
+      font-weight: bold;
+    }
+  }
+}

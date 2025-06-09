@@ -1,13 +1,16 @@
-import { signOut } from 'firebase/auth'
-import Button from 'src/components/Button/Button'
-import { auth } from 'src/utils/firebase'
+import { getNowPlayingMovies } from 'src/api/movies'
+import Header from 'src/components/Header/Header'
+import useCallApi from 'src/hooks/useCallApi'
+import MainMovie from 'src/pages/BrowsePage/MainContainer/MainContainer'
+import { NowPlayingMoviesData } from 'src/types/movies'
 
 const BrowsePage = () => {
-  const handleSignOut = () => signOut(auth)
+  const { results: movies } = useCallApi<NowPlayingMoviesData>(getNowPlayingMovies)
 
   return (
     <div>
-      <Button text="Sign out" onClick={handleSignOut} />
+      <Header />
+      <main>{movies && <MainMovie movie={movies[0]} />}</main>
     </div>
   )
 }

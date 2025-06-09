@@ -7,11 +7,14 @@ import { auth } from 'src/utils/firebase'
 
 const App = () => {
   const navigate = useNavigate()
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      if (user) {
+      const path = document.location.pathname
+
+      if (user && !path.includes('browse')) {
         navigate('/browse')
-      } else {
+      } else if (!user && path !== '/') {
         navigate('/')
       }
     })
