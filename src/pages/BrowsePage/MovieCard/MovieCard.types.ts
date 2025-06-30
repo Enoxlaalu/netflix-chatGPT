@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Movie } from 'src/types/movies'
 
-export type MainContainerType = FC<{
-  movie: Movie
+export type MovieCardType = FC<{
+  card: Movie
 }>

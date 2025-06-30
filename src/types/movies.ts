@@ -1,4 +1,4 @@
-export type NowPlayingMovie = {
+export type Movie = {
   adult: boolean
   backdrop_path: string
   genre_ids: number[]
@@ -15,8 +15,8 @@ export type NowPlayingMovie = {
   vote_count: number
 }
 
-export type NowPlayingMoviesData = {
-  results: NowPlayingMovie[]
+export type MoviesData = {
+  results: Movie[]
 }
 
 export type MovieVideo = {

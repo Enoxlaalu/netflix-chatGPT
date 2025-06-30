@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { Movie } from 'src/types/movies'
 
-export type MainContainerType = FC<{
-  movie: Movie
+export type MovieGroupType = FC<{
+  title: string
+  list: Movie[]
 }>
