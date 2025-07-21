@@ -8,7 +8,6 @@ import { ErrorsType } from 'src/types/types'
 import { signIn, signUp } from 'src/pages/LoginPage/login'
 import getLoginFormInputs from 'src/pages/LoginPage/LoginForm/getLoginFormInputs'
 import { User } from 'firebase/auth'
-import { useNavigate } from 'react-router'
 
 const LoginForm = () => {
   const [data, setData] = useState<LoginDataType>({} as LoginDataType)
@@ -17,7 +16,7 @@ const LoginForm = () => {
   const [loginError, setLoginError] = useState('')
   const [isSignUp, setIsSignUp] = useState(false)
 
-  const onChange = (id: string, value: string) => setData({ ...data, [id]: value })
+  const onChange = (value: string, id: string) => setData({ ...data, [id]: value })
 
   const validateForm = () => {
     const errors: ErrorsType = {}

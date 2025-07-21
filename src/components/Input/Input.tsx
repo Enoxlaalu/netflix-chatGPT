@@ -5,7 +5,7 @@ import { ChangeEvent } from 'react'
 
 const Input: InputType = ({ id, label, value, onChange, error }) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onChange(id, event.target.value)
+    onChange(event.target.value, id)
   }
 
   return (

@@ -4,6 +4,7 @@ import s from './Header.module.scss'
 import Button from 'src/components/Button/Button'
 import { signOut } from 'firebase/auth'
 import { auth } from 'src/utils/firebase'
+import { Link, Navigate } from 'react-router'
 
 const Header = () => {
   const handleSignOut = () => signOut(auth)
@@ -12,12 +13,12 @@ const Header = () => {
     {
       id: 'home',
       name: 'Home',
-      link: '/',
+      link: '/browse',
     },
     {
-      id: 'shows',
-      name: 'TV Shows',
-      link: '/shows',
+      id: 'gptSearch',
+      name: 'GPT Search',
+      link: '/gptSearch',
     },
     {
       id: 'movies',
@@ -33,7 +34,7 @@ const Header = () => {
         {links.map(({ id, name, link }) => {
           return (
             <li key={id}>
-              <a href={link}>{name}</a>
+              <Link to={link}>{name}</Link>
             </li>
           )
         })}

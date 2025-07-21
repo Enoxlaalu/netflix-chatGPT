@@ -1,0 +1,4 @@
+export const GPT_KEY =
+  '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'
+
+export const OPEN_ROUTER_KEY = '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'
