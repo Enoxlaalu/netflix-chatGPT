@@ -16,5 +16,7 @@ export const makeGptSearch = async (query: string) => {
     }),
   })
 
+  if (!res.ok) throw new Error(`OpenRouter error: ${res.status}`)
+
   return await res.json()
 }

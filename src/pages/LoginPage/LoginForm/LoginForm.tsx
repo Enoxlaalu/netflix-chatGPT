@@ -7,12 +7,13 @@ import { LoginDataType } from 'src/pages/LoginPage/LoginForm/LoginForm.types'
 import { ErrorsType } from 'src/types/types'
 import { signIn, signUp } from 'src/pages/LoginPage/login'
 import getLoginFormInputs from 'src/pages/LoginPage/LoginForm/getLoginFormInputs'
-import { User } from 'firebase/auth'
+
+const TEST_EMAIL = import.meta.env.DEV ? 'test@test.com' : ''
+const TEST_PASSWORD = import.meta.env.DEV ? 'Test123!' : ''
 
 const LoginForm = () => {
   const [data, setData] = useState<LoginDataType>({} as LoginDataType)
   const [errors, setErrors] = useState<ErrorsType>({} as ErrorsType)
-  const [user, setUser] = useState<User | null>(null)
   const [loginError, setLoginError] = useState('')
   const [isSignUp, setIsSignUp] = useState(false)
 
@@ -27,7 +28,7 @@ const LoginForm = () => {
     const passwordError = (!passwordRegex.test(data.password) && 'Wrong password') || (!data.password && 'Required')
 
     if (emailError) errors.email = emailError
-    if (passwordError) errors.email = passwordError
+    if (passwordError) errors.password = passwordError
 
     return errors
   }
@@ -44,13 +45,23 @@ const LoginForm = () => {
 
     const signFunction = isSignUp ? signUp : signIn
 
-    const { user, errorMessage } = await signFunction(data.email, data.password)
+    const { errorMessage } = await signFunction(data.email, data.password)
 
-    if (user) setUser(user)
     if (errorMessage) setLoginError(errorMessage)
   }
 
   const inputs = getLoginFormInputs(isSignUp)
+
+  const handleTestLogin = async () => {
+    const { errorCode, errorMessage } = await signIn(TEST_EMAIL, TEST_PASSWORD)
+    if (!errorCode) return
+    if (errorCode === 'auth/user-not-found' || errorCode === 'auth/invalid-credential') {
+      const { errorMessage: signUpError } = await signUp(TEST_EMAIL, TEST_PASSWORD)
+      if (signUpError) setLoginError(signUpError)
+    } else {
+      setLoginError(errorMessage ?? '')
+    }
+  }
 
   const changeForm = () => setIsSignUp((v) => !v)
 
@@ -73,6 +84,7 @@ const LoginForm = () => {
         New to Netflix? <b>Sign up now.</b>
       </p>
       <p className={s.loginError}>{loginError}</p>
+      <p className={s.testLogin} onClick={handleTestLogin}>Use test account</p>
     </form>
   )
 }

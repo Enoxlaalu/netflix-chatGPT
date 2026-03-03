@@ -31,7 +31,9 @@ const GptSearchPage = () => {
 
     const movieListTmdb = await Promise.all(movieRequestsList)
 
-    const movieBackdrops: string[] = movieListTmdb.map((m) => m.results[0].backdrop_path)
+    const movieBackdrops: string[] = movieListTmdb
+      .map((m) => m.results?.[0]?.backdrop_path)
+      .filter(Boolean)
 
     setMovieList(movieBackdrops)
   }
@@ -53,7 +55,7 @@ const GptSearchPage = () => {
                 <li
                   className={s.card}
                   style={{
-                    backgroundImage: `url("https://image.tmdb.org/t/p/w300/${path}")`,
+                    backgroundImage: `url("https://image.tmdb.org/t/p/w300${path}")`,
                   }}
                 />
               )

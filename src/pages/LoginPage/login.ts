@@ -6,29 +6,27 @@ import { auth } from 'src/utils/firebase'
 export const signUp = (
   email: LoginDataType['email'],
   password: LoginDataType['password']
-): Promise<{ user?: User; errorMessage?: string }> => {
+): Promise<{ user?: User; errorMessage?: string; errorCode?: string }> => {
   return createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user
       return { user }
     })
     .catch((error: ErrorsType) => {
-      const errorMessage = error.message
-      return { errorMessage }
+      return { errorMessage: error.message, errorCode: error.code }
     })
 }
 
 export const signIn = (
   email: LoginDataType['email'],
   password: LoginDataType['password']
-): Promise<{ user?: User; errorMessage?: string }> => {
+): Promise<{ user?: User; errorMessage?: string; errorCode?: string }> => {
   return signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user
       return { user }
     })
     .catch((error: ErrorsType) => {
-      const errorMessage = error.message
-      return { errorMessage }
+      return { errorMessage: error.message, errorCode: error.code }
     })
 }
