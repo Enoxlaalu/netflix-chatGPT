@@ -9,4 +9,4 @@ export const getMovieVideos = (movieId: number) =>
   callApi(`https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`)
 
 export const getMovieByName = (query: string) =>
-  callApi(`https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`)
+  callApi(`https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(query)}&include_adult=false&language=en-US&page=1`)

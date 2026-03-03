@@ -5,9 +5,10 @@ import useCallApi from 'src/hooks/useCallApi'
 import { MovieVideoData } from 'src/types/movies'
 
 const MainContainer: MainContainerType = ({ movie }) => {
-  const { results: videos } = useCallApi<MovieVideoData>(() => getMovieVideos(movie.id))
+  const { data: videosData } = useCallApi<MovieVideoData>(() => getMovieVideos(movie.id))
 
-  if (!videos) return null
+  const videos = videosData?.results
+  if (!videos?.length) return null
 
   const trailer = videos.find((v) => v.type === 'Trailer') || videos[0]
 

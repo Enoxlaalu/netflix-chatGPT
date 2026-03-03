@@ -11,4 +11,9 @@
   &:hover {
     background-color: rgb(193, 17, 25);
   }
+
+  &:disabled {
+    background-color: rgb(150, 150, 150);
+    cursor: not-allowed;
+  }
 }

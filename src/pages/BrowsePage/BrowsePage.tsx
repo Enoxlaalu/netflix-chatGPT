@@ -8,10 +8,15 @@ import { MoviesData } from 'src/types/movies'
 import s from './BrowsePage.module.scss'
 
 const BrowsePage = () => {
-  const { results: nowPlaying } = useCallApi<MoviesData>(getNowPlayingMovies)
-  const { results: popular } = useCallApi<MoviesData>(getPopularMovies)
-  const { results: topRated } = useCallApi<MoviesData>(getTopRatedMovies)
-  const { results: upcoming } = useCallApi<MoviesData>(getUpcomingMovies)
+  const { data: nowPlayingData } = useCallApi<MoviesData>(getNowPlayingMovies)
+  const { data: popularData } = useCallApi<MoviesData>(getPopularMovies)
+  const { data: topRatedData } = useCallApi<MoviesData>(getTopRatedMovies)
+  const { data: upcomingData } = useCallApi<MoviesData>(getUpcomingMovies)
+
+  const nowPlaying = nowPlayingData?.results
+  const popular = popularData?.results
+  const topRated = topRatedData?.results
+  const upcoming = upcomingData?.results
 
   const groups = [
     {

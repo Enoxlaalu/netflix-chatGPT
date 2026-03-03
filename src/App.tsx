@@ -10,7 +10,7 @@ const App = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       const path = document.location.pathname
 
       if (user && path === '/') {
@@ -19,6 +19,8 @@ const App = () => {
         navigate('/')
       }
     })
+
+    return unsubscribe
   }, [])
 
   return (
