@@ -3,7 +3,7 @@ import s from './Spinner.module.scss';
 import { SpinnerComponentType } from 'src/components/Spinner/Spinner.types';
 import clsx from 'clsx';
 
-const Spinner: SpinnerComponentType = ({ color = 'black', size = 'normal', className }) => {
+const Spinner: SpinnerComponentType = ({ color = 'white', size = 'normal', className }) => {
   return <div className={clsx(s.loader, s[color], s[size], className)} />;
 };
 

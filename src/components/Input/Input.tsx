@@ -3,14 +3,14 @@ import s from './Input.module.scss'
 import { InputType } from 'src/components/Input/Input.types'
 import { ChangeEvent } from 'react'
 
-const Input: InputType = ({ id, label, value, onChange, error }) => {
+const Input: InputType = ({ id, label, value, onChange, error, type = 'text' }) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value, id)
   }
 
   return (
     <div className={s.inputContainer}>
-      <input type="text" id={id} value={value} onChange={handleChange} className={s.input} />
+      <input type={type} id={id} value={value} onChange={handleChange} className={s.input} />
       <label htmlFor={id} className={clsx(s.label, value && s.hasValue)}>
         {label}
       </label>

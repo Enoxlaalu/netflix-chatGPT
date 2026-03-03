@@ -6,9 +6,12 @@ const MovieCard: MovieCardType = ({ card }) => {
     <li
       className={s.card}
       style={{
-        backgroundImage: `url("https://image.tmdb.org/t/p/w300${card.backdrop_path}")`,
+        backgroundImage: card.backdrop_path
+          ? `url("https://image.tmdb.org/t/p/w300${card.backdrop_path}")`
+          : 'none',
       }}
     >
+      <span className={s.title}>{card.title}</span>
     </li>
   )
 }

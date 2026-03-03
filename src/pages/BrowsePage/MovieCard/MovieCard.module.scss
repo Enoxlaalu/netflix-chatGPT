@@ -3,4 +3,22 @@
   height: 169px;
   background-repeat: no-repeat;
   background-size: cover;
+  background-color: #1a1a1a;
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 8px 6px;
+  font-size: 13px;
+  color: #fff;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

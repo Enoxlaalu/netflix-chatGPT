@@ -4,6 +4,7 @@ export type InputType = FC<{
   id: string
   label: string
   value: string
-  onChange: (id: string, v: string) => void
+  onChange: (value: string, id: string) => void
   error?: string
+  type?: string
 }>

@@ -4,7 +4,7 @@ import s from './Header.module.scss'
 import Button from 'src/components/Button/Button'
 import { signOut } from 'firebase/auth'
 import { auth } from 'src/utils/firebase'
-import { Link, Navigate } from 'react-router'
+import { Link, NavLink } from 'react-router'
 
 const Header = () => {
   const handleSignOut = () => signOut(auth)
@@ -20,24 +20,21 @@ const Header = () => {
       name: 'GPT Search',
       link: '/gptSearch',
     },
-    {
-      id: 'movies',
-      name: 'Movies',
-      link: '/movies',
-    },
   ]
 
   return (
     <header className={s.header}>
-      <Logo />
+      <Link to="/browse">
+        <Logo />
+      </Link>
       <nav className={s.nav}>
-        {links.map(({ id, name, link }) => {
-          return (
+        <ul>
+          {links.map(({ id, name, link }) => (
             <li key={id}>
-              <Link to={link}>{name}</Link>
+              <NavLink to={link} className={({ isActive }) => isActive ? s.active : ''}>{name}</NavLink>
             </li>
-          )
-        })}
+          ))}
+        </ul>
       </nav>
       <Button text="Sign out" onClick={handleSignOut} />
     </header>

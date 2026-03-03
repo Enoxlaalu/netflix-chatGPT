@@ -73,6 +73,7 @@ const LoginForm = () => {
             key={el.id}
             id={el.id}
             label={el.label}
+            type={el.type}
             value={data[el.id]}
             onChange={onChange}
             error={errors[el.id]}
