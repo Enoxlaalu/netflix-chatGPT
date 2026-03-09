@@ -43,8 +43,20 @@ const BrowsePage = () => {
   ]
 
   const allLoading = loading || !popularData || !topRatedData || !upcomingData
-  if (allLoading) return <div className={s.page}><Header /><Spinner className={s.spinner} /></div>
-  if (error) return <div className={s.page}><Header /><p className={s.error}>{error}</p></div>
+  if (allLoading)
+    return (
+      <div className={s.page}>
+        <Header />
+        <Spinner className={s.spinner} />
+      </div>
+    )
+  if (error)
+    return (
+      <div className={s.page}>
+        <Header />
+        <p className={s.error}>{error}</p>
+      </div>
+    )
 
   return (
     <div className={s.page}>

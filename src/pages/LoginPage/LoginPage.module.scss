@@ -1,9 +1,11 @@
 @use 'src/styles/variables.scss' as *;
 
 .page {
+  position: relative;
   background-image: url($bg_url);
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
 
   &::before {
     content: '';
@@ -20,6 +22,16 @@
   position: absolute;
   top: 24px;
   left: 0;
+
+  @media (max-width: 768px) {
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    svg {
+      width: 100px;
+    }
+  }
 }
 
 .formContainer {

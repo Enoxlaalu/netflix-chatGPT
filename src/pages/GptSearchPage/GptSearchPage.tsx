@@ -7,11 +7,12 @@ import s from './GptSearchPage.module.scss'
 import { makeGptSearch } from 'src/api/openRouter'
 import Spinner from 'src/components/Spinner/Spinner'
 import { getMovieByName } from 'src/api/movies'
+import { Movie } from 'src/types/movies'
 
 const GptSearchPage = () => {
   const [value, setValue] = useState('')
   const [loading, setLoading] = useState(false)
-  const [movieList, setMovieList] = useState<string[]>([])
+  const [movieList, setMovieList] = useState<Movie[]>([])
   const [error, setError] = useState<string | null>(null)
 
   const onChange = (v: string) => setValue(v)
@@ -28,17 +29,17 @@ const GptSearchPage = () => {
         `act as a movie recommendation system and suggest 5 movies for the query: ${value}. Give movies' names comma separated`
       )
 
-      const movieList: string = res.choices[0].message.content
-      const movieArray = movieList.split(', ')
+      const movieNames: string = res.choices[0].message.content
+      const movieArray = movieNames.split(/,\s*/).map((s) => s.trim()).filter(Boolean)
 
       const movieRequestsList = movieArray.map((name) => getMovieByName(name))
       const movieListTmdb = await Promise.all(movieRequestsList)
 
-      const movieBackdrops: string[] = movieListTmdb
-        .map((m) => m.results?.[0]?.backdrop_path)
+      const movies: Movie[] = movieListTmdb
+        .map((m) => m.results?.[0])
         .filter(Boolean)
 
-      setMovieList(movieBackdrops)
+      setMovieList(movies)
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Something went wrong')
     } finally {
@@ -56,19 +57,28 @@ const GptSearchPage = () => {
         </div>
         {error && <p className={s.error}>{error}</p>}
         {loading ? (
-          <Spinner />
+          <div className={s.spinnerWrapper}>
+            <Spinner />
+          </div>
         ) : movieList.length > 0 ? (
           <ul className={s.list}>
-            {movieList.map((path) => {
-              return (
-                <li
-                  className={s.card}
-                  style={{
-                    backgroundImage: `url("https://image.tmdb.org/t/p/w300${path}")`,
-                  }}
-                />
-              )
-            })}
+            {movieList.map((movie) => (
+              <li
+                key={movie.id}
+                className={s.card}
+                style={{
+                  backgroundImage: movie.backdrop_path
+                    ? `url("https://image.tmdb.org/t/p/w300${movie.backdrop_path}")`
+                    : 'none',
+                }}
+              >
+                <div className={s.cardOverlay}>
+                  <span className={s.cardTitle}>{movie.title}</span>
+                  <span className={s.cardRating}>⭐ {movie.vote_average.toFixed(1)}</span>
+                  <p className={s.cardOverview}>{movie.overview}</p>
+                </div>
+              </li>
+            ))}
           </ul>
         ) : null}
       </section>

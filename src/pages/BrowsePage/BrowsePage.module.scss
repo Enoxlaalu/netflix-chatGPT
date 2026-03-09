@@ -7,6 +7,11 @@
   display: grid;
   grid-row-gap: 16px;
   padding: 24px;
+
+  @media (max-width: 768px) {
+    padding: 16px;
+    grid-row-gap: 12px;
+  }
 }
 
 .spinner {
@@ -18,4 +23,9 @@
   text-align: center;
   margin-top: 80px;
   font-size: 18px;
+
+  @media (max-width: 768px) {
+    margin-top: 40px;
+    font-size: 15px;
+  }
 }

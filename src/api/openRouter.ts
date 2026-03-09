@@ -6,7 +6,7 @@ export const makeGptSearch = async (query: string) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model: 'deepseek/deepseek-r1:free',
+      model: 'stepfun/step-3.5-flash:free',
       messages: [
         {
           role: 'user',

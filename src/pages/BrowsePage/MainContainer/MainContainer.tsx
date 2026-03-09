@@ -8,9 +8,22 @@ const MainContainer: MainContainerType = ({ movie }) => {
   const { data: videosData } = useCallApi<MovieVideoData>(() => getMovieVideos(movie.id))
 
   const videos = videosData?.results
-  if (!videos?.length) return null
+  const trailer = videos?.find((v) => v.type === 'Trailer') || videos?.[0]
 
-  const trailer = videos.find((v) => v.type === 'Trailer') || videos[0]
+  if (!videos) {
+    return (
+      <section
+        className={s.mainMovie}
+        style={{
+          backgroundImage: movie.backdrop_path
+            ? `url("https://image.tmdb.org/t/p/original${movie.backdrop_path}")`
+            : 'none',
+        }}
+      />
+    )
+  }
+
+  if (!trailer) return null
 
   return (
     <section className={s.mainMovie}>
@@ -20,7 +33,7 @@ const MainContainer: MainContainerType = ({ movie }) => {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerPolicy="strict-origin-when-cross-origin"
         allowFullScreen
-      ></iframe>
+      />
     </section>
   )
 }

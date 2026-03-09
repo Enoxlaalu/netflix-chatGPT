@@ -1,21 +1,44 @@
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .form {
   display: grid;
   grid-row-gap: 12px;
   align-self: center;
   justify-self: center;
   padding: 48px 64px;
-  background-color: rgba($color: #000000, $alpha: 0.7);
-  min-width: 450px;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  max-width: 450px;
+  animation: fadeInUp 0.4s ease both;
 
   input {
     background-color: transparent;
     color: #fff;
   }
+
+  @media (max-width: 768px) {
+    padding: 32px 24px;
+    max-width: 100%;
+    border-radius: 0;
+  }
+
+  @media (max-width: 480px) {
+    padding: 24px 16px;
+  }
 }
 
 .changeFormText {
   margin: 16px 0;
-  color: #fff;
+  color: var(--color-text);
 
   b {
     cursor: pointer;
@@ -23,16 +46,17 @@
 }
 
 .loginError {
-  color: red;
+  color: var(--color-error);
 }
 
 .testLogin {
   margin-top: 8px;
-  color: #aaa;
-  font-size: 13px;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
   cursor: pointer;
+  transition: color 0.2s ease;
 
   &:hover {
-    color: #fff;
+    color: var(--color-text);
   }
 }
