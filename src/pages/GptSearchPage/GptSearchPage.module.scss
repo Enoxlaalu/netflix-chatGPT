@@ -75,14 +75,6 @@
 .card {
   width: calc((100% - 48px) / 3);
   aspect-ratio: 16 / 9;
-
-  @media (max-width: 1024px) {
-    width: calc((100% - 20px) / 2);
-  }
-
-  @media (max-width: 600px) {
-    width: 100%;
-  }
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -91,6 +83,14 @@
   position: relative;
   overflow: hidden;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  @media (max-width: 1024px) {
+    width: calc((100% - 20px) / 2);
+  }
+
+  @media (max-width: 600px) {
+    width: 100%;
+  }
 
   &:hover {
     transform: scale(1.02);

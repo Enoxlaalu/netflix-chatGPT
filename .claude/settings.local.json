@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:openrouter.ai)",
+      "Bash(ls:*)",
+      "Bash(grep:*)"
+    ]
+  }
+}

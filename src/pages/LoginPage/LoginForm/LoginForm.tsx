@@ -8,8 +8,8 @@ import { ErrorsType } from 'src/types/types'
 import { signIn, signUp } from 'src/pages/LoginPage/login'
 import getLoginFormInputs from 'src/pages/LoginPage/LoginForm/getLoginFormInputs'
 
-const TEST_EMAIL = import.meta.env.DEV ? 'test@test.com' : ''
-const TEST_PASSWORD = import.meta.env.DEV ? 'Test123!' : ''
+const TEST_EMAIL = 'test@test.com'
+const TEST_PASSWORD = 'Test123!'
 
 const LoginForm = () => {
   const [data, setData] = useState<LoginDataType>({} as LoginDataType)
@@ -85,7 +85,9 @@ const LoginForm = () => {
         New to Netflix? <b>Sign up now.</b>
       </p>
       <p className={s.loginError}>{loginError}</p>
-      <p className={s.testLogin} onClick={handleTestLogin}>Use test account</p>
+      <p className={s.testLogin} onClick={handleTestLogin}>
+        Use test account
+      </p>
     </form>
   )
 }
